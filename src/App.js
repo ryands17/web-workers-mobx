@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react'
+import Counter from './Counter.worker'
 
-function App() {
+const { counterState } = Counter()
+
+const App = observer(() => {
+  useEffect(() => {
+    counterState().then(console.log)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Counter App: MobX</h1>
+      {/* <p>Counter: {counterStore.counter}</p> */}
+      <br />
+      {/* <button onClick={counterStore.increment}>Increment</button>
+      <button onClick={counterStore.decrement}>Decrement</button> */}
     </div>
-  );
-}
+  )
+})
 
-export default App;
+export default App
